@@ -1,0 +1,70 @@
+#debug: true
+server:
+  port: 22222
+
+spring:
+  cache:
+  # spring cache 缓存类型为redis  也可以是其他的实现 
+    type: redis
+  redis:
+  # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器地址
+    host: 127.0.0.1
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password: 
+    jedis:
+      pool:
+      #连接池最大连接数（使用负值表示没有限制）
+        max-active: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1
+        # 连接池中的最大空闲连接
+        max-idle: 8
+        # 连接池中的最小空闲连接
+        min-idle: 0
+        # 连接超时时间（毫秒）
+    timeout: 300
+  #MySql配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: root
+    
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springboot?useUnicode=true&amp;characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+  #Jpa配置
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    
+    
+    
+  activemq:
+   #ActiveMQ通讯地址
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+    # 在考虑结束之前等待的时间
+    close-timeout: 15s
+     # 默认代理URL是否应该在内存中。如果指定了显式代理，则忽略此值。
+    in-memory: false
+    # 是否在回滚回滚消息之前停止消息传递。这意味着当启用此命令时，消息顺序不会被保留。
+    non-blocking-redelivery: false
+    # 等待消息发送响应的时间。设置为0等待永远。
+    send-timeout: 0
+    
+    queue-name: active.queue
+    topic-name: active.topic
+    pool:
+    #是否替换默认的连接池，使用ActiveMQ的连接池需引入的依赖
+      enabled: true
+      #连接池最大连接数
+      max-connections: 10
+      #空闲的连接过期时间，默认为30秒
+      idle-timeout: 30000
+#  jms:
+#    pub-sub-domain: true
